@@ -2,8 +2,15 @@
 
 :root {
   --base-font-size: 1rem;
+  --sizzling-red: hsl(353, 81%, 60%);
 
   font-size: var(--base-font-size);
+}
+
+html,
+body,
+#root {
+  height: 100%;
 }
 
 body {
@@ -13,9 +20,32 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--sizzling-red);
+  color: white;
+  font-weight: 400;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+button {
+  background: hsla(100, 100%, 99%, 0.3);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: var(--base-font-size);
+  margin: 0;
+  padding: 8px 16px;
 }

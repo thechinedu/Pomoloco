@@ -1,22 +1,13 @@
-// import logo from "./logo.png";
-import { Timer } from "./components/Timer";
+import { Header } from "./components/Header/Header";
+import { Timer } from "./components/Timer/Timer";
+import { Wrapper } from "./components/Wrapper/Wrapper";
 
 function App() {
   return (
-    <>
-      <header>
-        <nav>
-          <a href="/" className="logo">
-            {/* <img src={logo} alt="Site logo" /> */}
-            Pomoloco
-          </a>
-        </nav>
-      </header>
-
-      <main>
-        <Timer />
-      </main>
-    </>
+    <Wrapper>
+      <Header />
+      <Timer />
+    </Wrapper>
   );
 }
 
