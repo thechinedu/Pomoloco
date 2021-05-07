@@ -1,6 +1,7 @@
 import logo from "./logo.png";
 
 import styles from "./Header.module.css";
+import { Icon } from "./SettingsIcon";
 
 export const Header = () => (
   <header className={styles.header}>
@@ -10,7 +11,10 @@ export const Header = () => (
         Pomoloco
       </a>
 
-      <button className={styles.settings}>Settings</button>
+      <button className={styles.settings}>
+        <Icon className={styles.settingsIcon} />
+        Settings
+      </button>
     </nav>
   </header>
 );

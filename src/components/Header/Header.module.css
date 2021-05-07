@@ -9,13 +9,23 @@
 }
 
 .img {
+  margin-right: 8px;
   width: 24px;
 }
 
 .logo {
   align-items: center;
   display: flex;
+  font-size: larger;
+  font-weight: 700;
 }
 
 .settings {
+  align-items: center;
+  display: flex;
+}
+
+.settingsIcon {
+  fill: var(--rich-black);
+  margin-right: 8px;
 }

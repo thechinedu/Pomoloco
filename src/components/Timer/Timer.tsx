@@ -69,21 +69,48 @@ export const Timer = () => {
   }, [timeLeft]);
 
   return (
-    <main>
-      <div>
-        <button onClick={handleSetActiveTimer("pomodoro")}>Pomodoro</button>
-        <button onClick={handleSetActiveTimer("shortBreak")}>
+    <main className={styles.wrapper}>
+      <div className={styles.timers}>
+        <button
+          onClick={handleSetActiveTimer("pomodoro")}
+          className={
+            activeTimer === PomodoroDefaultTimers.pomodoro ? styles.active : ""
+          }
+        >
+          Pomodoro
+        </button>
+        <button
+          onClick={handleSetActiveTimer("shortBreak")}
+          className={
+            activeTimer === PomodoroDefaultTimers.shortBreak
+              ? styles.active
+              : ""
+          }
+        >
           Short break
         </button>
-        <button onClick={handleSetActiveTimer("longBreak")}>Long break</button>
+        <button
+          onClick={handleSetActiveTimer("longBreak")}
+          className={
+            activeTimer === PomodoroDefaultTimers.longBreak ? styles.active : ""
+          }
+        >
+          Long break
+        </button>
       </div>
 
-      <p>{output}</p>
+      <p className={styles.timerDisplay}>{output}</p>
 
-      <div>
-        <button onClick={handleStartTimer}>Start</button>
-        <button onClick={handlePauseTimer}>Pause</button>
-        <button onClick={handleStopTimer}>Reset</button>
+      <div className={styles.controls}>
+        <button onClick={handleStartTimer} className={styles.start}>
+          Start
+        </button>
+        <button onClick={handlePauseTimer} className={styles.pause}>
+          Pause
+        </button>
+        <button onClick={handleStopTimer} className={styles.reset}>
+          Reset
+        </button>
       </div>
     </main>
   );

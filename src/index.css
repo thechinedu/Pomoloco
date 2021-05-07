@@ -3,6 +3,12 @@
 :root {
   --base-font-size: 1rem;
   --sizzling-red: hsl(353, 81%, 60%);
+  --faded-red: hsl(353, 81%, 60%, 0.1);
+  --baby-powder: hsl(100, 100%, 99%, 0.1);
+  --rich-black: hsl(207, 95%, 8%, 0.8);
+  --tiffany-blue: hsl(174, 62%, 47%);
+  --orange-peel: hsl(35, 100%, 55%);
+  --white: hsl(0, 0%, 100%);
 
   font-size: var(--base-font-size);
 }
@@ -20,8 +26,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--sizzling-red);
-  color: white;
+  background-color: var(--faded-red);
+  color: var(--rich-black);
   font-weight: 400;
 }
 
@@ -35,17 +41,22 @@ img {
 }
 
 a {
-  color: white;
+  color: var(--rich-black);
   text-decoration: none;
 }
 
 button {
-  background: hsla(100, 100%, 99%, 0.3);
+  background: var(--faded-red);
   border: none;
   border-radius: 8px;
-  color: white;
+  color: var(--rich-black);
   cursor: pointer;
   font-size: var(--base-font-size);
   margin: 0;
   padding: 8px 16px;
+}
+
+p {
+  margin: 0;
+  padding: 0;
 }

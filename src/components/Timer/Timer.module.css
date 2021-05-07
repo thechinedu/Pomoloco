@@ -1,0 +1,47 @@
+.wrapper {
+  background-color: var(--faded-red);
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 48px;
+  padding: 32px;
+}
+
+.wrapper button {
+  border-radius: 4px;
+  margin: 0 4px;
+}
+
+.timers button {
+  background: transparent;
+}
+
+.timers .active {
+  background-color: var(--rich-black);
+  color: var(--white);
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.timerDisplay {
+  font-size: 100px;
+  font-weight: 700;
+  padding: 32px 0;
+}
+
+.controls button {
+  color: var(--white);
+  font-weight: 700;
+  padding: 16px 32px;
+}
+
+.start {
+  background-color: var(--tiffany-blue);
+}
+
+.pause {
+  background-color: var(--orange-peel);
+}
+
+.reset {
+  background-color: var(--sizzling-red);
+}
