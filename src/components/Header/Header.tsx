@@ -1,9 +1,14 @@
+import { FC, Dispatch, SetStateAction } from "react";
 import logo from "./logo.png";
 
 import styles from "./Header.module.css";
 import { Icon } from "./SettingsIcon";
 
-export const Header = () => (
+interface HeaderProps {
+  showDialog: () => void;
+}
+
+export const Header: FC<HeaderProps> = ({ showDialog }) => (
   <header className={styles.header}>
     <nav className={styles.nav}>
       <a href="/" className={styles.logo}>
@@ -11,7 +16,7 @@ export const Header = () => (
         Pomoloco
       </a>
 
-      <button className={styles.settings}>
+      <button className={styles.settings} onClick={showDialog}>
         <Icon className={styles.settingsIcon} />
         Settings
       </button>

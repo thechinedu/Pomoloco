@@ -54,6 +54,11 @@ button {
   font-size: var(--base-font-size);
   margin: 0;
   padding: 8px 16px;
+  transition-duration: 0.4s;
+}
+
+button:active {
+  transform: translateY(14px);
 }
 
 p {

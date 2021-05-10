@@ -2,4 +2,5 @@
   height: 100%;
   margin: auto;
   max-width: 800px;
+  padding-inline: 16px;
 }
