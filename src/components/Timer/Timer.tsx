@@ -1,16 +1,17 @@
 import { FC } from "react";
 import { useState, useEffect, useRef } from "react";
-import { PomodoroDefaultTimers } from "../../App";
+import { AppSettings } from "../../App";
 
 import styles from "./Timer.module.css";
 
 interface TimerProps {
-  timer: {
-    pomodoro: PomodoroDefaultTimers;
-    longBreak: PomodoroDefaultTimers;
-    shortBreak: PomodoroDefaultTimers;
-  };
+  timer: AppSettings["timer"];
 }
+
+type ActiveTimer =
+  | TimerProps["timer"]["pomodoro"]
+  | TimerProps["timer"]["longBreak"]
+  | TimerProps["timer"]["shortBreak"];
 
 const padTimer = (timer: number) => `${timer}`.padStart(2, "0");
 
@@ -23,10 +24,11 @@ const getOutput = (timeLeft: number, baseDisplay: string) => {
   return timeLeft ? display : baseDisplay;
 };
 
-export const Timer: FC<TimerProps> = ({ timer }) => {
-  const [activeTimer, setActiveTimer] = useState(timer.pomodoro);
+export const Timer: FC<TimerProps> = ({ timer: readOnlyTimer }) => {
+  const [timer, setTimer] = useState(readOnlyTimer);
+  const [activeTimer, setActiveTimer] = useState<ActiveTimer>(timer.pomodoro);
   const [timeLeft, setTimeLeft] = useState(0);
-  const output = getOutput(timeLeft, `${padTimer(activeTimer)}:00`);
+  const output = getOutput(timeLeft, `${padTimer(activeTimer.value)}:00`);
   const intervalRef = useRef<number>();
 
   const handleSetActiveTimer = (type: keyof typeof timer) => () => {
@@ -40,7 +42,7 @@ export const Timer: FC<TimerProps> = ({ timer }) => {
       return;
     }
 
-    const end = Date.now() + activeTimer * 1000 * 60;
+    const end = Date.now() + activeTimer.value * 1000 * 60;
     const start = Date.now();
 
     setTimeLeft(end - start);
@@ -66,13 +68,18 @@ export const Timer: FC<TimerProps> = ({ timer }) => {
     return () => clearInterval(intervalRef.current);
   }, [timeLeft]);
 
+  useEffect(() => {
+    setTimer(readOnlyTimer);
+    setActiveTimer(readOnlyTimer[activeTimer.key]);
+  }, [readOnlyTimer, activeTimer]);
+
   return (
     <main className={styles.wrapper}>
       <div className={styles.timers}>
         <button
           onClick={handleSetActiveTimer("pomodoro")}
           className={
-            activeTimer === PomodoroDefaultTimers.pomodoro ? styles.active : ""
+            activeTimer.key === timer.pomodoro.key ? styles.active : ""
           }
         >
           Pomodoro
@@ -80,9 +87,7 @@ export const Timer: FC<TimerProps> = ({ timer }) => {
         <button
           onClick={handleSetActiveTimer("shortBreak")}
           className={
-            activeTimer === PomodoroDefaultTimers.shortBreak
-              ? styles.active
-              : ""
+            activeTimer.key === timer.shortBreak.key ? styles.active : ""
           }
         >
           Short break
@@ -90,7 +95,7 @@ export const Timer: FC<TimerProps> = ({ timer }) => {
         <button
           onClick={handleSetActiveTimer("longBreak")}
           className={
-            activeTimer === PomodoroDefaultTimers.longBreak ? styles.active : ""
+            activeTimer.key === timer.longBreak.key ? styles.active : ""
           }
         >
           Long break

@@ -18,6 +18,9 @@ export const SettingsDialog: FC<SettingsDialogProps> = ({
   onSave,
 }) => {
   const [settings, setSettings] = useState(readOnlySettings);
+  const {
+    timer: { pomodoro, longBreak, shortBreak },
+  } = settings;
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const elem = evt.target;
@@ -27,7 +30,10 @@ export const SettingsDialog: FC<SettingsDialogProps> = ({
       ...settings,
       [settingsGroup as string]: {
         ...settings[settingsGroup as keyof AppSettings],
-        [settingsProperty as string]: +elem.value,
+        [settingsProperty as string]: {
+          key: settingsProperty,
+          value: +elem.value,
+        },
       },
     });
   };
@@ -64,7 +70,7 @@ export const SettingsDialog: FC<SettingsDialogProps> = ({
                   data-settings-group="timer"
                   data-settings-property="pomodoro"
                   id="pomodoro"
-                  defaultValue={settings.timer.pomodoro}
+                  defaultValue={pomodoro.value}
                 />
               </div>
 
@@ -77,7 +83,7 @@ export const SettingsDialog: FC<SettingsDialogProps> = ({
                   data-settings-group="timer"
                   data-settings-property="shortBreak"
                   id="short-break"
-                  defaultValue={settings.timer.shortBreak}
+                  defaultValue={shortBreak.value}
                 />
               </div>
 
@@ -90,7 +96,7 @@ export const SettingsDialog: FC<SettingsDialogProps> = ({
                   data-settings-group="timer"
                   data-settings-property="longBreak"
                   id="long-break"
-                  defaultValue={settings.timer.longBreak}
+                  defaultValue={longBreak.value}
                 />
               </div>
             </div>

@@ -12,9 +12,9 @@ export enum PomodoroDefaultTimers {
 
 export interface AppSettings {
   timer: {
-    pomodoro: PomodoroDefaultTimers;
-    shortBreak: PomodoroDefaultTimers;
-    longBreak: PomodoroDefaultTimers;
+    pomodoro: { key: "pomodoro"; value: number };
+    shortBreak: { key: "shortBreak"; value: number };
+    longBreak: { key: "longBreak"; value: number };
   };
 }
 
@@ -22,9 +22,12 @@ const App: FC = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [settings, setSettings] = useState<AppSettings>({
     timer: {
-      pomodoro: PomodoroDefaultTimers.pomodoro,
-      longBreak: PomodoroDefaultTimers.longBreak,
-      shortBreak: PomodoroDefaultTimers.shortBreak,
+      pomodoro: { key: "pomodoro", value: PomodoroDefaultTimers.pomodoro },
+      longBreak: { key: "longBreak", value: PomodoroDefaultTimers.longBreak },
+      shortBreak: {
+        key: "shortBreak",
+        value: PomodoroDefaultTimers.shortBreak,
+      },
     },
   });
 
