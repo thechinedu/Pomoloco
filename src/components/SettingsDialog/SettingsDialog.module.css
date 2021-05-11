@@ -1,0 +1,79 @@
+.dialogWrapper {
+  background: var(--rich-black);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.dialogContent {
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 80%;
+  margin: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 8px 16px;
+}
+
+.dialogContent header {
+  border-bottom: 1px solid var(--rich-black);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon {
+  fill: var(--rich-black);
+}
+
+.minuteSettings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.minuteSettings > p {
+  flex-basis: 100%;
+  padding: 16px 0;
+}
+
+.minuteSettings > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.minuteSettings label {
+  font-size: 0.875rem;
+  opacity: 0.5;
+  padding-block-end: 4px;
+}
+
+.minuteSettings input {
+  background-color: var(--rich-black-lighter);
+  border: none;
+  border-radius: 4px;
+  outline: 0;
+  padding: 8px 16px;
+  width: 50px;
+}
+
+.minuteSettings input:focus {
+  box-shadow: 0 0 2px 0 var(--rich-black-lighter);
+}
+
+.dialogContent footer {
+  margin-left: auto;
+  margin-top: auto;
+}
+
+.dialogContent footer button {
+  background-color: var(--tiffany-blue);
+  color: var(--white);
+}

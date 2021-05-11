@@ -1,12 +1,15 @@
-import { useRef } from "react";
-import { useState, useEffect } from "react";
+import { FC } from "react";
+import { useState, useEffect, useRef } from "react";
+import { PomodoroDefaultTimers } from "../../App";
 
 import styles from "./Timer.module.css";
 
-enum PomodoroDefaultTimers {
-  pomodoro = 25,
-  longBreak = 15,
-  shortBreak = 5,
+interface TimerProps {
+  timer: {
+    pomodoro: PomodoroDefaultTimers;
+    longBreak: PomodoroDefaultTimers;
+    shortBreak: PomodoroDefaultTimers;
+  };
 }
 
 const padTimer = (timer: number) => `${timer}`.padStart(2, "0");
@@ -20,12 +23,7 @@ const getOutput = (timeLeft: number, baseDisplay: string) => {
   return timeLeft ? display : baseDisplay;
 };
 
-export const Timer = () => {
-  const [timer] = useState({
-    pomodoro: PomodoroDefaultTimers.pomodoro,
-    longBreak: PomodoroDefaultTimers.longBreak,
-    shortBreak: PomodoroDefaultTimers.shortBreak,
-  });
+export const Timer: FC<TimerProps> = ({ timer }) => {
   const [activeTimer, setActiveTimer] = useState(timer.pomodoro);
   const [timeLeft, setTimeLeft] = useState(0);
   const output = getOutput(timeLeft, `${padTimer(activeTimer)}:00`);
