@@ -2,7 +2,7 @@ import { FC } from "react";
 import logo from "./logo.png";
 
 import styles from "./Header.module.css";
-import { Icon } from "./SettingsIcon";
+import { SettingsIcon } from "../Icon";
 
 interface HeaderProps {
   showDialog: () => void;
@@ -17,7 +17,7 @@ export const Header: FC<HeaderProps> = ({ showDialog }) => (
       </a>
 
       <button className={styles.settings} onClick={showDialog}>
-        <Icon className={styles.settingsIcon} />
+        <SettingsIcon className={styles.settingsIcon} />
         Settings
       </button>
     </nav>

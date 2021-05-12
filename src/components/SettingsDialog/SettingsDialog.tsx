@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import { AppSettings } from "../../App";
 
 import styles from "./SettingsDialog.module.css";
-import { Icon } from "./CrossIcon";
+import { CrossIcon } from "../Icon";
 
 interface SettingsDialogProps {
   open?: boolean;
@@ -54,7 +54,7 @@ export const SettingsDialog: FC<SettingsDialogProps> = ({
             <header>
               <h3>Settings</h3>
               <span onClick={onClose}>
-                <Icon className={styles.icon} />
+                <CrossIcon className={styles.icon} />
               </span>
             </header>
 
