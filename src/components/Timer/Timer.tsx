@@ -30,6 +30,7 @@ export const Timer: FC<TimerProps> = ({ timer: readOnlyTimer }) => {
   const [timeLeft, setTimeLeft] = useState(0);
   const output = getOutput(timeLeft, `${padTimer(activeTimer.value)}:00`);
   const intervalRef = useRef<number>();
+  const clickSound = new Audio(`${process.env.PUBLIC_URL}/audio/click.wav`);
 
   const handleSetActiveTimer = (type: keyof typeof timer) => () => {
     setActiveTimer(timer[type]);
@@ -55,6 +56,8 @@ export const Timer: FC<TimerProps> = ({ timer: readOnlyTimer }) => {
   const handlePauseTimer = () => {
     clearInterval(intervalRef.current);
   };
+
+  const playClickSound = () => clickSound.play();
 
   useEffect(() => {
     if (timeLeft) {
@@ -104,7 +107,7 @@ export const Timer: FC<TimerProps> = ({ timer: readOnlyTimer }) => {
 
       <p className={styles.timerDisplay}>{output}</p>
 
-      <div className={styles.controls}>
+      <div className={styles.controls} onClick={playClickSound}>
         <button onClick={handleStartTimer} className={styles.start}>
           Start
         </button>

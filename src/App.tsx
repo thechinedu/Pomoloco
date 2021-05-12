@@ -16,6 +16,10 @@ export interface AppSettings {
     shortBreak: { key: "shortBreak"; value: number };
     longBreak: { key: "longBreak"; value: number };
   };
+  alarms: {
+    [key: string]: string;
+    selected: string
+  };
 }
 
 const App: FC = () => {
@@ -28,6 +32,16 @@ const App: FC = () => {
         key: "shortBreak",
         value: PomodoroDefaultTimers.shortBreak,
       },
+    },
+    alarms: {
+      alert: "Alert",
+      battleship: "Battleship",
+      bell: "Bell",
+      bird: "Bird",
+      "morning-clock-alarm": "Morning Clock",
+      rooster: "Rooster",
+      "sci-fi": "Science Fiction",
+      selected: "alert"
     },
   });
 

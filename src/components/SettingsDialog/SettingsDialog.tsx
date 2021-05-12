@@ -101,6 +101,15 @@ export const SettingsDialog: FC<SettingsDialogProps> = ({
               </div>
             </div>
 
+            <div className="alarm">
+              <p>Alarm Sound</p>
+
+              <select name="" id="">
+                <option value="alert">Alert</option>
+                <option value="rooster">Rooster</option>
+              </select>
+            </div>
+
             <footer>
               <button onClick={handleSave}>Save</button>
             </footer>
