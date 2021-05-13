@@ -1,11 +1,12 @@
 import { FC } from "react";
 import { useState, useEffect, useRef } from "react";
-import { AppSettings } from "../../App";
+import { AppSettings, useSound } from "../../App";
 
 import styles from "./Timer.module.css";
 
 interface TimerProps {
   timer: AppSettings["timer"];
+  alarmSound: string;
 }
 
 type ActiveTimer =
@@ -24,15 +25,17 @@ const getOutput = (timeLeft: number, baseDisplay: string) => {
   return timeLeft ? display : baseDisplay;
 };
 
-export const Timer: FC<TimerProps> = ({ timer: readOnlyTimer }) => {
+export const Timer: FC<TimerProps> = ({ timer: readOnlyTimer, alarmSound }) => {
   const [timer, setTimer] = useState(readOnlyTimer);
   const [activeTimer, setActiveTimer] = useState<ActiveTimer>(timer.pomodoro);
   const [timeLeft, setTimeLeft] = useState(0);
   const output = getOutput(timeLeft, `${padTimer(activeTimer.value)}:00`);
   const intervalRef = useRef<number>();
-  const clickSound = new Audio(`${process.env.PUBLIC_URL}/audio/click.wav`);
+  const timerCompleteSound = useSound(alarmSound);
+  const clickSound = useSound("click");
 
   const handleSetActiveTimer = (type: keyof typeof timer) => () => {
+    timerCompleteSound.stop();
     setActiveTimer(timer[type]);
     setTimeLeft(0);
   };
@@ -66,10 +69,14 @@ export const Timer: FC<TimerProps> = ({ timer: readOnlyTimer }) => {
       }, 1000) as unknown) as number;
     }
 
-    if (timeLeft <= 0) clearInterval(intervalRef.current);
+    if (timeLeft <= 0 && intervalRef.current !== undefined) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = undefined;
+      timerCompleteSound.play();
+    }
 
     return () => clearInterval(intervalRef.current);
-  }, [timeLeft]);
+  }, [timeLeft, timerCompleteSound]);
 
   useEffect(() => {
     setTimer(readOnlyTimer);

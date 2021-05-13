@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { AppSettings } from "../../App";
+import { AppSettings, useSound } from "../../App";
 
 import styles from "./SettingsDialog.module.css";
 import { CrossIcon } from "../Icon";
@@ -20,9 +20,11 @@ export const SettingsDialog: FC<SettingsDialogProps> = ({
   const [settings, setSettings] = useState(readOnlySettings);
   const {
     timer: { pomodoro, longBreak, shortBreak },
+    alarms,
   } = settings;
+  const audio = useSound("");
 
-  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeTimer = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const elem = evt.target;
     const { settingsGroup, settingsProperty } = elem.dataset;
 
@@ -34,6 +36,21 @@ export const SettingsDialog: FC<SettingsDialogProps> = ({
           key: settingsProperty,
           value: +elem.value,
         },
+      },
+    });
+  };
+
+  const handleChangeAlarm = (evt: React.ChangeEvent<HTMLSelectElement>) => {
+    const { value: selected } = evt.target;
+
+    audio.changeSource(selected);
+    audio.play();
+
+    setSettings({
+      ...settings,
+      alarms: {
+        ...settings.alarms,
+        selected,
       },
     });
   };
@@ -58,7 +75,7 @@ export const SettingsDialog: FC<SettingsDialogProps> = ({
               </span>
             </header>
 
-            <div className={styles.minuteSettings} onChange={handleChange}>
+            <div className={styles.minuteSettings} onChange={handleChangeTimer}>
               <p>Custom Time (Minutes)</p>
 
               <div>
@@ -104,9 +121,17 @@ export const SettingsDialog: FC<SettingsDialogProps> = ({
             <div className="alarm">
               <p>Alarm Sound</p>
 
-              <select name="" id="">
-                <option value="alert">Alert</option>
-                <option value="rooster">Rooster</option>
+              <select
+                defaultValue={alarms.selected}
+                onChange={handleChangeAlarm}
+              >
+                {Object.entries(alarms)
+                  .filter(([key]) => key !== "selected")
+                  .map(([key, alarm]) => (
+                    <option key={key} value={key}>
+                      {alarm}
+                    </option>
+                  ))}
               </select>
             </div>
 
