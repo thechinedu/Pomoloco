@@ -53,6 +53,7 @@ export const Timer: FC<TimerProps> = ({ timer: readOnlyTimer, alarmSound }) => {
   };
 
   const handleStopTimer = () => {
+    intervalRef.current = undefined;
     setTimeLeft(0);
   };
 
